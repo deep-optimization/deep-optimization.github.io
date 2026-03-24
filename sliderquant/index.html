@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SliderQuant: Accurate Post-Training Quantization for LLMs">
+  <meta property="og:title" content="SliderQuant: Accurate Post-Training Quantization for LLMs" />
+  <meta property="og:description"
+    content="Official project page for SliderQuant, a sliding-window PTQ framework for LLMs." />
+  <meta property="og:url" content="https://deep-optimization.github.io/sliderquant/" />
+  <meta property="og:image" content="static/images/teaser.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:title" content="SliderQuant: Accurate Post-Training Quantization for LLMs">
+  <meta name="twitter:description"
+    content="Official project page for SliderQuant, a sliding-window PTQ framework for LLMs.">
+  <meta name="twitter:image" content="static/images/teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="SliderQuant, LLM, post-training quantization, PTQ, sliding quantization, quantization">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SliderQuant: Accurate Post-Training Quantization for LLMs</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <section class="hero is-sliderquant">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <div class="eyebrow">ICLR 2026</div>
+            <h1 class="title is-1 publication-title">SliderQuant: Accurate Post-Training Quantization for LLMs</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Shigeng Wang<sup>1,2*</sup>, </span>
+              <span class="author-block">Chao Li<sup>1*</sup>, </span>
+              <span class="author-block">Yangyuxuan Kang<sup>1</sup>, </span>
+              <span class="author-block">Jiawei Fan<sup>1</sup>, </span>
+              <span class="author-block">Zhonghong Ou<sup>2</sup>, </span>
+              <span class="author-block">Anbang Yao<sup>1†</sup></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup> Intel Labs China</span>
+              <span class="author-block">&nbsp;&nbsp;<sup>2</sup> BUPT</span>
+            </div>
+            <div class="publication-subtitle">
+              <span class="eql-cntrb"><small><sup>*</sup>Equal contribution, <sup>†</sup>Corresponding author.</small></span>
+            </div>
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://github.com/deep-optimization/SliderQuant.git" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-comments"></i></span>
+                  <span>OpenReview</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/IntelLabsChina/SliderQuant" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-face-smile"></i></span>
+                  <span>Hugging Face</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section teaser-section">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered">
+          <div class="column is-11">
+            <div class="teaser-card">
+              <img src="static/images/teaser.png" alt="SliderQuant overview">
+            </div>
+            <p class="caption">
+              Figure 1: SliderQuant introduces inter-layer sliding quantization and intra-layer sliding quantization to
+              adapt the quantization window across shallow, intermediate, and deep layers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section intro-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              In this paper, we address post-training quantization (PTQ) for large language models (LLMs) from an
+              overlooked perspective: given a pre-trained high-precision LLM, the predominant sequential quantization
+              framework treats different layers equally, but this may be not optimal in challenging bit-width settings.
+              We empirically study the quantization impact of different layers on model accuracy, and observe that: (1)
+              shallow/deep layers are usually more sensitive to quantization than intermediate layers; (2) among
+              shallow/deep layers, the most sensitive one is the first/last layer, which exhibits significantly larger
+              quantization error than others. These empirical observations imply that the quantization design for
+              different layers of LLMs is required on multiple levels instead of a single level shared to all layers.
+              Motivated by this, we propose a new PTQ framework termed Sliding-layer Quantization (SliderQuant) that
+              relies on a simple adaptive sliding quantization concept facilitated by few learnable parameters. The base
+              component of SliderQuant is called inter-layer sliding quantization, which incorporates three types of
+              novel sliding window designs tailored for addressing the varying quantization sensitivity of shallow,
+              intermediate and deep layers. The other component is called intra-layer sliding quantization that
+              leverages an incremental strategy to quantize each window. As a result, SliderQuant has a strong ability
+              to reduce quantization errors across layers. Extensive experiments on basic language generation, zero-shot
+              commonsense reasoning and challenging math and code tasks with various LLMs, including
+              Llama/Llama2/Llama3/Qwen2.5 model families, DeepSeek-R1 distilled models and large MoE models, show that
+              our method outperforms existing PTQ methods (including the latest PTQ methods using rotation
+              transformations) for both weight-only quantization and weight-activation quantization under diverse bit
+              width settings. Code is available at https://github.com/deep-optimization/SliderQuant.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light results-hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-12">
+            <h2 class="title is-3 has-text-centered">Results</h2>
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item">
+                <img src="static/images/table_1.png" alt="Table 1">
+                <p class="caption">Table 1: Language generation results.</p>
+              </div>
+              <div class="item">
+                <img src="static/images/table_2.png" alt="Table 2">
+                <p class="caption">Table 2: Zero-shot commonsense reasoning results.</p>
+              </div>
+              <div class="item">
+                <img src="static/images/table_3.png" alt="Table 3">
+                <p class="caption">Table 3: Methods with extra inference-time cost.</p>
+              </div>
+              <div class="item">
+                <img src="static/images/table_4.png" alt="Table 4">
+                <p class="caption">Table 4: MoE model results.</p>
+              </div>
+              <div class="item">
+                <img src="static/images/table_5.png" alt="Table 5">
+                <p class="caption">Table 5: DeepSeek-R1 distilled model results.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Citation</h2>
+          <pre><code>@inproceedings{wang2026sliderquant,
+  title={SliderQuant: Accurate Post-Training Quantization for LLMs},
+  author={Wang, Shigeng and Li, Chao and Kang, Yangyuxuan and Fan, Jiawei and Ou, Zhonghong and Yao, Anbang},
+  booktitle={International Conference on Learning Representations},
+  year={2026}
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
